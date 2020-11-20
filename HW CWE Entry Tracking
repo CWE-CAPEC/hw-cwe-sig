@@ -1,114 +1,113 @@
-Identifier    Submission Title                                              CWE ID          Final Title or Other Solution to Ingest Submitted Content       Submitter Organization        Submitter Name          Submitter Contact           Submission Date         Primary Editor      Comments
-HCWE1         Improperly Implemented Sticky Bits or Write-Once Attributes   1224            Improper Restriction of Write-Once Bit Fields                   Intel Corporation             Hareesh Khattri         hareesh.khattri@intel.com   12/12/2019              Alec Summers	 
-HCWE2         Incorrect Register Defaults or Module Parameters              1221            Incorrect Register Defaults or Module Parameters                Intel Corporation             Hareesh Khattri         hareesh.khattri@intel.com   12/12/2019              Alec Summers	 
-HCWE3       Insufficient Granularity of Address Regions Protected by Register Locks	1222	Insufficient Granularity of Address Regions Protected by Register Locks	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	12/12/2019	Alec Summers	 
-HCWE4	Race Conditions for Write-Once Attributes	1223	Race Condition for Write-Once Attributes	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	12/12/2019	Alec Summers	 
-HCWE5	Improperly implemented lock protection	1231	Improper Implementation of Lock Protection Registers	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	1/15/2020	David Rothenberg	 
-HCWE6	Improper lock behavior across power state transitions	1232	Improper Lock Behavior After Power State Transition	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	1/15/2020	David Rothenberg	 
-HCWE7	Hardware internal or debug modes allow override of locks 	1234	used submitted title for new entry	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	1/15/2020	Luke Malinowski	 
-HCWE8	Missing hardware lock protection for security sensitive controls 	1233	Improper Hardware Lock Protection for Security Sensitive Controls 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	1/15/2020	Rushi Purohit	 
-HCWE9	Access Control Lacks Required Granularity	1220	Insufficient Granularity of Access Control	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	1/15/2020	David Rothenberg	 
-HCWE10	Incorrect Access Control Policy	276	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	2/5/2020	Drew Buttner	used 276, added to h/w view
-HCWE11	Missing Access Control Policy	 	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	2/5/2020	Drew Buttner	 
-HCWE12	Policy Employs Insecure Default Values	276	Used submitted title for new entry	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	2/5/2020	Drew Buttner	used 276, added to h/w view
-HCWE13	Trusted Agents Excluded from Accessing a Sensitive Asset	 	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	2/5/2020	Drew Buttner	 
-HCWE14	Untrusted Agents Given Access to a Sensitive Asset	 	 	Intel Corporation	unknown	unknown	2/5/2020	Drew Buttner	seems like Class level CWE-732
-HCWE15	Failure to Disable Reserve Bits	1209	Used submitted title for new entry	Intel Corporation	Brent Sherman	btrent.m.sherman@intel.com	2/6/2020	Alec Summers	 
-HCWE16	Sensitive Data Improperly Cleared from Hardware Storage Elements Leading to Disclosure	1239	Improper Zeroization of Hardware Register	Tortuga Logic	Nicole Fern	nicole@tortugalogic.com	2/7/2020	Drew Buttner	 
-HCWE17	Bypassing Access Control Through Alternate Paths	1299	Missing Protection Mechanism for Alternate Hardware Interface	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	Luke Malinowski	 
-HCWE18	Access Control Check is Implemented after Asset is Accessed	1280	Access Control Check Implemented After Asset is Accessed	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	Chris Lathrop	 
-HCWE19	Inclusion of Undocumented Interfaces or Chicken Bits	1242	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	Alec Summers	 
-HCWE20	Improper Verification of Provenance of Incoming Proxy Requests (Confused Deputy)	updated 441 to be hw and sw relevant	 	Intel Corporation	Arun Kanuparthi & Narasimha Kumar V Mangipudi	Arun.kanuparthi@intel.com	2/10/2020	 	 
-HCWE21	Untrusted DMA Device Enabled Too Early in Boot Phase 	1190	DMA Device Enabled Too Early in Boot Phase	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	 	 
-HCWE22	Improper Write Traffic Handling in Limited-write Non-Volatile Memories	1246	Improper Write Handling in Limited-write Non-Volatile Memories	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	Rushi Purohit	 
-HCWE23	Hardware Logic Contains Race Conditions	1298	Hardware Logic Contains Race Conditions	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	John Butterworth	 
-HCWE24	Improper Isolation of Shared System-on-Chip (SoC) Resources	1189	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	Luke Malinowski	 
-HCWE25	Crypto Primitives Used Without Successful Self-Test	1279	Used submitted title for new entry	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	2/10/2020	Chris Lathrop	 
-HCWE26	Mirrored Regions with Different Values	1251	Used submitted title for new entry	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	2/10/2020	 	 
-HCWE27	Improper handling of overlap between protected memory ranges	1260	Used submitted title for new entry	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	2/10/2020	Kerry Crouse	 
-HCWE28	Sensitive Information Uncleared During Debug Flows	1258	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	John Butterworth	 
-HCWE29	Improper Authorization on Debug and Test Interfaces	1244	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Alec Summers	 
-HCWE30	Debug and Test Interface on the product is Not Protected Against Untrusted Agents	1191	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Luke Malinowski	 
-HCWE31	Hardware Logic Contains Faulty Finite State Machines (FSMs)	1245	Improper Finite State Machines (FSMs) in Hardware Logic	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	David Rothenberg	 
-HCWE32	Security-sensitive values sensed from fuses not blocked on debug	1243	Exposure of Security-Sensitive Fuse Values During Debug	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Alec Summers	 
-HCWE33	Crypto Primitives Not Resistant to Side Channel Attacks	n/a	 	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	1/28/2020	Drew Buttner	Merged with CWE-203
-HCWE34	Secret Leakage in Crypto Primitives	n/a	 	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	1/28/2020	Drew Buttner	not a weakness as submitted. see comments column ( J )
-HCWE35	Incorrect Usage of Crypto Primitives	1240	Use of a Risky Cryptographic Primitive	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	1/28/2020	Drew Buttner	 
+Identifier    Submission Title                                                        CWE ID          Final Title or Other Solution to Ingest Submitted Content               Submitter Organization        Submitter Name          Submitter Contact           Submission Date         Primary Editor      Comments
+HCWE1         Improperly Implemented Sticky Bits or Write-Once Attributes             1224            Improper Restriction of Write-Once Bit Fields                           Intel Corporation             Hareesh Khattri         hareesh.khattri@intel.com   12/12/2019              Alec Summers	 
+HCWE2         Incorrect Register Defaults or Module Parameters                        1221            Incorrect Register Defaults or Module Parameters                        Intel Corporation             Hareesh Khattri         hareesh.khattri@intel.com   12/12/2019              Alec Summers	 
+HCWE3         Insufficient Granularity of Address Regions Protected by Register Locks 1222            Insufficient Granularity of Address Regions Protected by Register Locks Intel Corporation             Hareesh Khattri         hareesh.khattri@intel.com   12/12/2019              Alec Summers	 
+HCWE4         Race Conditions for Write-Once Attributes                               1223	Race Condition for Write-Once Attributes	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	12/12/2019	Alec Summers	 
+HCWE5         Improperly implemented lock protection1231	Improper Implementation of Lock Protection Registers	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	1/15/2020	David Rothenberg	 
+HCWE6         Improper lock behavior across power state transitions	1232	Improper Lock Behavior After Power State Transition	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	1/15/2020	David Rothenberg	 
+HCWE7         Hardware internal or debug modes allow override of locks 	1234	used submitted title for new entry	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	1/15/2020	Luke Malinowski	 
+HCWE8         Missing hardware lock protection for security sensitive controls 	1233	Improper Hardware Lock Protection for Security Sensitive Controls 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	1/15/2020	Rushi Purohit	 
+HCWE9         Access Control Lacks Required Granularity	1220	Insufficient Granularity of Access Control	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	1/15/2020	David Rothenberg	 
+HCWE10        Incorrect Access Control Policy	276	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	2/5/2020	Drew Buttner	used 276, added to h/w view
+HCWE11        Missing Access Control Policy	 	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	2/5/2020	Drew Buttner	 
+HCWE12        Policy Employs Insecure Default Values	276	Used submitted title for new entry	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	2/5/2020	Drew Buttner	used 276, added to h/w view
+HCWE13        Trusted Agents Excluded from Accessing a Sensitive Asset	 	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	2/5/2020	Drew Buttner	 
+HCWE14        Untrusted Agents Given Access to a Sensitive Asset	 	 	Intel Corporation	unknown	unknown	2/5/2020	Drew Buttner	seems like Class level CWE-732
+HCWE15        Failure to Disable Reserve Bits	1209	Used submitted title for new entry	Intel Corporation	Brent Sherman	btrent.m.sherman@intel.com	2/6/2020	Alec Summers	 
+HCWE16        Sensitive Data Improperly Cleared from Hardware Storage Elements Leading to Disclosure	1239	Improper Zeroization of Hardware Register	Tortuga Logic	Nicole Fern	nicole@tortugalogic.com	2/7/2020	Drew Buttner	 
+HCWE17        Bypassing Access Control Through Alternate Paths	1299	Missing Protection Mechanism for Alternate Hardware Interface	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	Luke Malinowski	 
+HCWE18        Access Control Check is Implemented after Asset is Accessed	1280	Access Control Check Implemented After Asset is Accessed	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	Chris Lathrop	 
+HCWE19        Inclusion of Undocumented Interfaces or Chicken Bits	1242	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	Alec Summers	 
+HCWE20        Improper Verification of Provenance of Incoming Proxy Requests (Confused Deputy)	updated 441 to be hw and sw relevant	 	Intel Corporation	Arun Kanuparthi & Narasimha Kumar V Mangipudi	Arun.kanuparthi@intel.com	2/10/2020	 	 
+HCWE21        Untrusted DMA Device Enabled Too Early in Boot Phase 	1190	DMA Device Enabled Too Early in Boot Phase	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	 	 
+HCWE22        Improper Write Traffic Handling in Limited-write Non-Volatile Memories	1246	Improper Write Handling in Limited-write Non-Volatile Memories	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	Rushi Purohit	 
+HCWE23        Hardware Logic Contains Race Conditions	1298	Hardware Logic Contains Race Conditions	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	John Butterworth	 
+HCWE24        Improper Isolation of Shared System-on-Chip (SoC) Resources	1189	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/10/2020	Luke Malinowski	 
+HCWE25        Crypto Primitives Used Without Successful Self-Test	1279	Used submitted title for new entry	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	2/10/2020	Chris Lathrop	 
+HCWE26        Mirrored Regions with Different Values	1251	Used submitted title for new entry	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	2/10/2020	 	 
+HCWE27        Improper handling of overlap between protected memory ranges	1260	Used submitted title for new entry	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	2/10/2020	Kerry Crouse	 
+HCWE28        Sensitive Information Uncleared During Debug Flows	1258	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	John Butterworth	 
+HCWE29        Improper Authorization on Debug and Test Interfaces	1244	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Alec Summers	 
+HCWE30        Debug and Test Interface on the product is Not Protected Against Untrusted Agents	1191	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Luke Malinowski	 
+HCWE31        Hardware Logic Contains Faulty Finite State Machines (FSMs)	1245	Improper Finite State Machines (FSMs) in Hardware Logic	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	David Rothenberg	 
+HCWE32        Security-sensitive values sensed from fuses not blocked on debug	1243	Exposure of Security-Sensitive Fuse Values During Debug	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Alec Summers	 
+HCWE33        Crypto Primitives Not Resistant to Side Channel Attacks	n/a	 	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	1/28/2020	Drew Buttner	Merged with CWE-203
+HCWE34        Secret Leakage in Crypto Primitives	n/a	 	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	1/28/2020	Drew Buttner	not a weakness as submitted. see comments column ( J )
+HCWE35        Incorrect Usage of Crypto Primitives	1240	Use of a Risky Cryptographic Primitive	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	1/28/2020	Drew Buttner	 
  	 	1241	Use of Predictable Algorithm in Random Number Generator	 	 	 	 	#N/A	 
-HCWE36	Usage of Non-Compliant Crypto	n/a	 	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	1/28/2020	Drew Buttner	merged with CWE-327
-HCWE37	Hardware is not resistant to voltage and clock glitches	1247	Missing Protection Against Voltage and Clock Glitches	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Alec Summers	 
-HCWE38	Improper Selection of Fuse Values	1253	Incorrect Selection of Fuse Values	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	John Butterworth	 
-HCWE39	Hardware Logic Does Not Contain Defenses to Handle Single Event Upsets	1261	Improper Handling of Single Event Upsets	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Gananand Kini	 
-HCWE40	Semiconductor Defects Present in Logic Implementing Security Sensitive Hardware Modules	1248	Semiconductor Defects in Hardware Logic with Security-Sensitive Implications	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Alec Summers	 
-HCWE41	Comparison Logic in Register Transfer Level (RTL) is Vulnerable to Timing Attacks	1254	Incorrect Comparison Logic Granularity	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Kerry Crouse	 
-HCWE42	CPU Hardware Not Configured to Support Exclusivity of Write and Execute Operations	1252	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/13/2020	 	 
-HCWE43	Control policy contains agents not in write policy 	1268	Policy Privileges are not Assigned Consistently Between Control and Data Agents	Intel Corporation	unknown	unknown	2/13/2020	Kerry Crouse	 
-HCWE44	Improper Protection of Security Identifiers 	1259	Used submitted title for new entry	Intel Corporation	unknown	unknown	2/13/2020	Chris Lathrop	 
-HCWE45	Incorrect Generation of Security Identifiers 	1270	Used submitted title for new entry	Intel Corporation	unknown	unknown	2/13/2020	Chris Lathrop	 
-HCWE46	Power on untrusted execution core before enabling fabric access control	1193	Used submitted title for new entry	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	 	Luke Malinowski	 
-HCWE47	Hardware Features Enable Physical Attacks from Software (Hardware Features Enable Physical Attacks from Software)	1256	Hardware Features Enable Physical Attacks from Software	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/8/2020	Alec Summers	 
-HCWE48	Register Interface Allows Software Access to Sensitive Data or Security Settings	1262	Used submitted title for new entry	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/8/2020	Alec Summers	 
-HCWE49	Non-transparent Sharing of Microarchitectural Resources	1303	 	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/8/2020	Gananand Kini	 
-HCWE50	Missing Protection Against Digital Side Channels	 	Submitter Rescinded	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	 	 	Submitter rescinded submission.To be covered in new example instance in cwe-230
-HCWE51	Missing Protection Against Physical Side Channels	"1300 &
+HCWE36Usage of Non-Compliant Crypto	n/a	 	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	1/28/2020	Drew Buttner	merged with CWE-327
+HCWE37Hardware is not resistant to voltage and clock glitches	1247	Missing Protection Against Voltage and Clock Glitches	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Alec Summers	 
+HCWE38Improper Selection of Fuse Values	1253	Incorrect Selection of Fuse Values	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	John Butterworth	 
+HCWE39Hardware Logic Does Not Contain Defenses to Handle Single Event Upsets	1261	Improper Handling of Single Event Upsets	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Gananand Kini	 
+HCWE40Semiconductor Defects Present in Logic Implementing Security Sensitive Hardware Modules	1248	Semiconductor Defects in Hardware Logic with Security-Sensitive Implications	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Alec Summers	 
+HCWE41Comparison Logic in Register Transfer Level (RTL) is Vulnerable to Timing Attacks	1254	Incorrect Comparison Logic Granularity	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/12/2020	Kerry Crouse	 
+HCWE42CPU Hardware Not Configured to Support Exclusivity of Write and Execute Operations	1252	Used submitted title for new entry	Intel Corporation	Arun Kanuparthi	Arun.kanuparthi@intel.com	2/13/2020	 	 
+HCWE43Control policy contains agents not in write policy 	1268	Policy Privileges are not Assigned Consistently Between Control and Data Agents	Intel Corporation	unknown	unknown	2/13/2020	Kerry Crouse	 
+HCWE44Improper Protection of Security Identifiers 	1259	Used submitted title for new entry	Intel Corporation	unknown	unknown	2/13/2020	Chris Lathrop	 
+HCWE45Incorrect Generation of Security Identifiers 	1270	Used submitted title for new entry	Intel Corporation	unknown	unknown	2/13/2020	Chris Lathrop	 
+HCWE46Power on untrusted execution core before enabling fabric access control	1193	Used submitted title for new entry	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	 	Luke Malinowski	 
+HCWE47Hardware Features Enable Physical Attacks from Software (Hardware Features Enable Physical Attacks from Software)	1256	Hardware Features Enable Physical Attacks from Software	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/8/2020	Alec Summers	 
+HCWE48Register Interface Allows Software Access to Sensitive Data or Security Settings	1262	Used submitted title for new entry	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/8/2020	Alec Summers	 
+HCWE49Non-transparent Sharing of Microarchitectural Resources	1303	 	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/8/2020	Gananand Kini	 
+HCWE50Missing Protection Against Digital Side Channels	 	Submitter Rescinded	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	 	 	Submitter rescinded submission.To be covered in new example instance in cwe-230
+HCWE51Missing Protection Against Physical Side Channels	"1300 &
 1301"	"Improper Protection Against Physical Side Channels
 
 Insufficient or Incomplete Data Removal within Hardware Component"	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/29/2020	Kerry Crouse	 
-HCWE52	Registers Holding Security Settings Do Not Have A Known Value on Reset	1271	Missing Known Value on Reset for Registers Holding Security Settings	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/15/2020	Alec Summers	 
-HCWE53	Immutable Data Stored in Writable Memory	1282	 	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/15/2020	Luke Malinowski	 
-HCWE54	Sequence of Processor Instructions Leads to Unexpected Behavior	1281	Used submitted title for new entry	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/15/2020	Luke Malinowski	 
-HCWE55	Hardware Block Incorrectly Connected to Larger System	1276	 	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/22/2020	Chris Lathrop	 
-HCWE56	Data Disclosure Resulting From De-synchronization Between Control and Data Channels	1264	Hardware Logic with Insecure De-Synchronization between Control and Data Channels	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/22/2020	John Butterworth	 
-HCWE57	Missing Protection Against Optical Reverse Engineering	1278	Used submitted title for new entry	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/22/2020	Chris Lathrop	 
+HCWE52Registers Holding Security Settings Do Not Have A Known Value on Reset	1271	Missing Known Value on Reset for Registers Holding Security Settings	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/15/2020	Alec Summers	 
+HCWE53Immutable Data Stored in Writable Memory	1282	 	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/15/2020	Luke Malinowski	 
+HCWE54Sequence of Processor Instructions Leads to Unexpected Behavior	1281	Used submitted title for new entry	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/15/2020	Luke Malinowski	 
+HCWE55Hardware Block Incorrectly Connected to Larger System	1276	 	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/22/2020	Chris Lathrop	 
+HCWE56Data Disclosure Resulting From De-synchronization Between Control and Data Channels	1264	Hardware Logic with Insecure De-Synchronization between Control and Data Channels	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/22/2020	John Butterworth	 
+HCWE57Missing Protection Against Optical Reverse Engineering	1278	Used submitted title for new entry	Tortuga Logic	Nicole Kern	nicole@tortugalogic.com	5/22/2020	Chris Lathrop	 
 HCWE58	POTENTIAL DUPLICATE: Sensitive Information Uncleared During Debug Flows	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	4/28/2020	 	 
-HCWE59	Incorrect Conversion of Security Identifiers 	Incorrect Conversion of Security Identifiers 	Incorrect Conversion of Security Identifiers 	Intel Corporation	unknown	unknown	4/28/2020	Luke Malinowski	 
-HCWE60	Incorrect Decoding of Security Identifiers 	1290	Incorrect Decoding of Security Identifiers 	Intel Corporation	unknown	unknown	4/28/2020	Luke Malinowski	 
-HCWE61	Inconsistent access protections applied to mirrored or aliased memory regions	1257	Used submitted title for new entry	Intel Corporation	unknown	unknown	4/28/2020	Luke Malinowski	 
-HCWE62	POTENTIAL DUPLICATE: Improper handling of overlap between protected memory ranges	 	 	Intel Corporation	unknown	unknown	4/28/2020	 	 
-HCWE63	Missing Security Identifier 	1302 & 1303	"Missing Security Identifier
+HCWE59Incorrect Conversion of Security Identifiers 	Incorrect Conversion of Security Identifiers 	Incorrect Conversion of Security Identifiers 	Intel Corporation	unknown	unknown	4/28/2020	Luke Malinowski	 
+HCWE60Incorrect Decoding of Security Identifiers 	1290	Incorrect Decoding of Security Identifiers 	Intel Corporation	unknown	unknown	4/28/2020	Luke Malinowski	 
+HCWE61Inconsistent access protections applied to mirrored or aliased memory regions	1257	Used submitted title for new entry	Intel Corporation	unknown	unknown	4/28/2020	Luke Malinowski	 
+HCWE62POTENTIAL DUPLICATE: Improper handling of overlap between protected memory ranges	 	 	Intel Corporation	unknown	unknown	4/28/2020	 	 
+HCWE63Missing Security Identifier 	1302 & 1303	"Missing Security Identifier
 
 Non-transparent Sharing of Microarchitectural Resources"	Intel Corporation	unknown	unknown	4/28/2020	Kerry Crouse	 
-HCWE64	Policy uses obsolete encoding 	1267	 	Intel Corporation	unknown	unknown	4/28/2020	Kerry Crouse	 
-HCWE65	Comparison Logic is Vulnerable to Power Side-Channel Attacks	1255	 	MITRE Corporation	Kerry Crouse	kcrouse@mitre.org	5/1/2020	Kerry Crouse	 
-HCWE66	Firmware not updateable	1277	 	Wells Fargo	Paul Wortman	Paul.Wortman@wellsfargo.com	5/13/2020	Chris Lathrop	 
-HCWE67	Missing functionality to Scrub devices for decommission	1266	 	Wells Fargo	Paul Wortman	Paul.Wortman@wellsfargo.com	5/28/2020	John Butterworth	 
-HCWE68	Mutable attestation or measurement reporting data	1283	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	6/5/2020	John Butterworth	 
-HCWE69	Insufficient protections on the volatile memory containing boot code	1274	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	6/5/2020	Kerry Crouse	 
-HCWE70	Missing ability to patch ROM code	 	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	6/5/2020	Gananand Kini	 
-HCWE71	Sharing of device unlock key with multiple parties involving outsourced semiconductor assembly and test (OSAT) vendors	1273	Device Unlock Credential Sharing	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	Kerry Crouse	 
-HCWE72	Incorrect system state preparation among debug/power state transitions	1272	Debug/Power State Transitions Leak Information	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	Kerry Crouse	 
-HCWE73	Product released in preproduction/manufacturing fuse configuration	1269	Product Released in Non-Release Configuration	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	Kerry Crouse	 
-HCWE74	Debug messages revealing unnecessary information	1295	Used submitted title for new entry	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	John Butterworth	 
-HCWE75	Unprotected confidential information on device accessible by OSAT vendors	1295	Unprotected Confidential Information on Device is Accessible by Outsourced Semiconductor Assembly and Test (OSAT) Vendors	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	Chris Lathrop	 
-HCWE76	Incorrect chaining or missing granularity of debug components	1296	 	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	Chris Lathrop	 
-HCWE77	Using the same public-key for debug and production code	1291	Public Key Re-Use for Signing both Debug and Production Code	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	John Butterworth	 
-HCWE78	Critical temperature/power limit event detection or response can be disabled or abused	 	 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	7/14/2020	 	 
-HCWE79	"Missing Immutable Root of Trust in Hardware
+HCWE64Policy uses obsolete encoding 	1267	 	Intel Corporation	unknown	unknown	4/28/2020	Kerry Crouse	 
+HCWE65Comparison Logic is Vulnerable to Power Side-Channel Attacks	1255	 	MITRE Corporation	Kerry Crouse	kcrouse@mitre.org	5/1/2020	Kerry Crouse	 
+HCWE66Firmware not updateable	1277	 	Wells Fargo	Paul Wortman	Paul.Wortman@wellsfargo.com	5/13/2020	Chris Lathrop	 
+HCWE67Missing functionality to Scrub devices for decommission	1266	 	Wells Fargo	Paul Wortman	Paul.Wortman@wellsfargo.com	5/28/2020	John Butterworth	 
+HCWE68Mutable attestation or measurement reporting data	1283	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	6/5/2020	John Butterworth	 
+HCWE69Insufficient protections on the volatile memory containing boot code	1274	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	6/5/2020	Kerry Crouse	 
+HCWE70Missing ability to patch ROM code	 	 	Intel Corporation	Narasimha Kumar V Mangipudi	narasimha.kumar.v.mangipudi@intel.com	6/5/2020	Gananand Kini	 
+HCWE71Sharing of device unlock key with multiple parties involving outsourced semiconductor assembly and test (OSAT) vendors	1273	Device Unlock Credential Sharing	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	Kerry Crouse	 
+HCWE72Incorrect system state preparation among debug/power state transitions	1272	Debug/Power State Transitions Leak Information	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	Kerry Crouse	 
+HCWE73Product released in preproduction/manufacturing fuse configuration	1269	Product Released in Non-Release Configuration	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	Kerry Crouse	 
+HCWE74Debug messages revealing unnecessary information	1295	Used submitted title for new entry	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	John Butterworth	 
+HCWE75Unprotected confidential information on device accessible by OSAT vendors	1295	Unprotected Confidential Information on Device is Accessible by Outsourced Semiconductor Assembly and Test (OSAT) Vendors	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	Chris Lathrop	 
+HCWE76Incorrect chaining or missing granularity of debug components	1296	 	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	Chris Lathrop	 
+HCWE77Using the same public-key for debug and production code	1291	Public Key Re-Use for Signing both Debug and Production Code	Intel Corporation	Parbati Kumar Manna	Parbati.K.Manna@intel.com	6/12/2020	John Butterworth	 
+HCWE78Critical temperature/power limit event detection or response can be disabled or abused	 	 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	7/14/2020	 	 
+HCWE79"Missing Immutable Root of Trust in Hardware
 
 "	 	 	Intel Corporation	Narasimha Kumar V Mangipudi	 Narasimsha.kumar.v.mangipudi@intel.com	7/14/2020	 	 
-HCWE80	Security-version number mutable to older versions	 	 	Intel Corporation	Narasimha Kumar V Mangipudi	 Narasimsha.kumar.v.mangipudi@intel.com	7/14/2020	 	 
-HCWE81	Missing or inadequate protections against hardware overheating	 	 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	7/14/2020	 	 
-HCWE82	Remanent data readable after memory erase	 	 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	7/14/2020	 	 
-HCWE83	System-power, operation points and thresholds (Thermal, Voltage, Current, Frequency, etc.) are modifiable by untrusted software to values outside supported, design points	 	 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	7/14/2020	 	 
-HCWE84	Thermal- and power-sensor-calibration data are modifiable by untrusted software	1314	 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	7/14/2020	 	 
-HCWE85	Fabric-address map allows programming of unwarranted overlaps of protected and unprotected ranges	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
-HCWE86	Missing security checks in fabric bridge 	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
-HCWE87	Improper Handling of Secure, Trace Data	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
-HCWE88	Missing Support for Security Features in On-chip Fabrics or Buse	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
-HCWE89	Improper Translation of Security Attributes by Fabric Bridge	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
-HCWE90	Incorrect setting of bus mastering capability in fabric end-point 	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
-HCWE91	"Firewall in on-chip fabric does not protect mirrored regions
+HCWE80Security-version number mutable to older versions	 	 	Intel Corporation	Narasimha Kumar V Mangipudi	 Narasimsha.kumar.v.mangipudi@intel.com	7/14/2020	 	 
+HCWE81Missing or inadequate protections against hardware overheating	 	 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	7/14/2020	 	 
+HCWE82Remanent data readable after memory erase	 	 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	7/14/2020	 	 
+HCWE83System-power, operation points and thresholds (Thermal, Voltage, Current, Frequency, etc.) are modifiable by untrusted software to values outside supported, design points	 	 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	7/14/2020	 	 
+HCWE84Thermal- and power-sensor-calibration data are modifiable by untrusted software	1314	 	Intel Corporation	Hareesh Khattri	hareesh.khattri@intel.com	7/14/2020	 	 
+HCWE85Fabric-address map allows programming of unwarranted overlaps of protected and unprotected ranges	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
+HCWE86Missing security checks in fabric bridge 	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
+HCWE87Improper Handling of Secure, Trace Data	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
+HCWE88Missing Support for Security Features in On-chip Fabrics or Buse	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
+HCWE89Improper Translation of Security Attributes by Fabric Bridge	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
+HCWE90Incorrect setting of bus mastering capability in fabric end-point 	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
+HCWE91"Firewall in on-chip fabric does not protect mirrored regions
 
 
 "	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
-HCWE92	Improper Isolation of Shared Resources in Network On Chip 	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
-HCWE93	Loading untrusted hardware configuration state during a power save/restore operation	1304	 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	7/30/2020	Luke Malinowski	 
-HCWE94	Unprotected interface can be an unintentional bypass and may be used for unauthorized access to critical controls and/or sensitive data	 	 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	8/13/2020	 	 
-HCWE95	During runtime, allowing hardware to enter test/debug mode may enable interference with intended operations		 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	8/20/2020	 	 
-HCWE96	Missing or Improperly Implemented Protection against Electromagnetic Fault Injection (EM-FI).	 	 	Bosch 	Sebastien Leger, Rohini Narasipur	Sebastien.Leger@de.bosch.com, rohini.narasipur@de.bosch.com 	8/27/2020	 	 
-HCWE97	Unprotected access to error injection functionality can put a redundant system into a degraded mode of operation	 	 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	9/10/2020	 	 
-HCWE98	 Improper manipulation of secret data allows for extraction of that secret by monitoring power fluctuations	 	 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	9/17/2020	 	 
-HCWE99	 Sensitive information exposed on JTAG interface	 	 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	10/1/2020	 	 
-HCWE100	Missing FI countermeasures cause skipping of conditional branch instructions	 	 	Riscure	Jasper van Woudenberg	vanWoudenberg@riscure.com	10/14/2020	 	 
-HCWE101	Alteration of Environmental Properties	 	 	Wells Fargo	Paul Wortman	Paul.Wortman@wellsfargo.com	10/27/2020	 	 
- 	 	 	 	 	 	 	 	 	 
+HCWE92Improper Isolation of Shared Resources in Network On Chip 	 	 	Intel Corporation	Arun Kanuparthi	arun.kanuparthi@intel.com	7/20/2020	 	 
+HCWE93Loading untrusted hardware configuration state during a power save/restore operation	1304	 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	7/30/2020	Luke Malinowski	 
+HCWE94Unprotected interface can be an unintentional bypass and may be used for unauthorized access to critical controls and/or sensitive data	 	 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	8/13/2020	 	 
+HCWE95During runtime, allowing hardware to enter test/debug mode may enable interference with intended operations		 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	8/20/2020	 	 
+HCWE96Missing or Improperly Implemented Protection against Electromagnetic Fault Injection (EM-FI).	 	 	Bosch 	Sebastien Leger, Rohini Narasipur	Sebastien.Leger@de.bosch.com, rohini.narasipur@de.bosch.com 	8/27/2020	 	 
+HCWE97Unprotected access to error injection functionality can put a redundant system into a degraded mode of operation	 	 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	9/10/2020	 	 
+HCWE98Improper manipulation of secret data allows for extraction of that secret by monitoring power fluctuations	 	 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	9/17/2020	 	 
+HCWE99Sensitive information exposed on JTAG interface	 	 	Accellera Systems Initiative	Accellera IP Security Assurance (IPSA) Working Group	ipsa@lists.accellera.org	10/1/2020	 	 
+HCWE100Missing FI countermeasures cause skipping of conditional branch instructions	 	 	Riscure	Jasper van Woudenberg	vanWoudenberg@riscure.com	10/14/2020	 	 
+HCWE101Alteration of Environmental Properties	 	 	Wells Fargo	Paul Wortman	Paul.Wortman@wellsfargo.com	10/27/2020	 	 
