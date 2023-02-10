@@ -7,8 +7,8 @@ assignees: ''
 
 ---
 
-##Topic Author
+## Topic Author
 
-##Amount of Time Requested
+## Amount of Time Requested
 
-##Topic Description
+## Topic Description
