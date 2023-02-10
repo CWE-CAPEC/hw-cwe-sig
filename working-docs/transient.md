@@ -1,4 +1,10 @@
-# Motivation and Overview
+New CWEs for Transient Execution
+================================
+
+A proposal by Intel, in collaboration with MITRE and the CWE community
+
+Motivation and Overview
+--------------------------------
 
 Common Weakness Enumeration (CWE) is “a community-developed list of
 common software and hardware weakness types that have security
@@ -7,7 +13,7 @@ of publicly known vulnerabilities. Each CVE is an instance of a CWE. For
 example,
 [CVE-2021-43618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43618)
 is “GNU Multiple Precision Arithmetic Library (GMP) through 6.2.1 has an
-mpz/inp\_raw.c integer overflow and resultant buffer overflow via
+`mpz/inp\_raw.c` integer overflow and resultant buffer overflow via
 crafted input, leading to a segmentation fault on 32-bit platforms.”
 This CVE is an instance of
 [CWE-787](https://cwe.mitre.org/data/definitions/787.html), whose
@@ -54,23 +60,24 @@ The objective of this document is to define
 causes of transient execution attacks, and with language that is
 sufficiently generic to benefit the entire CWE community.
 
-# New CWE Proposals
+New CWE Proposals
+--------------------------------
 
-## CWE-A: Processor Event Causes Transient Execution
+### CWE-A: Processor Event Causes Transient Execution
 
-### Description
+#### Description
 
 A processor event may allow subsequent operations to execute transiently
 (the operations execute without committing to architectural state).
 
-### Extended Description
+#### Extended Description
 
 Many commodity processors execute operations (such as instructions,
 etc.) out-of-order. For example, a processor may fetch the sequence of
-instructions A;B;C, but then execute them in a different order, such as
-A;C;B. This out-of-order execution sequence may produce the same result
-as an in-order sequence if the input to C does not depend on the output
-of B. Although operations on these processors may execute out-of-order,
+instructions `A;B;C`, but then execute them in a different order, such as
+`A;C;B`. This out-of-order execution sequence may produce the same result
+as an in-order sequence if the input to `C` does not depend on the output
+of `B`. Although operations on these processors may execute out-of-order,
 they commit in-order to the processor’s architectural state. Hence, all
 operations appear to software as though they had been executed in-order
 by the processor.
@@ -78,9 +85,9 @@ by the processor.
 Some processor events can cause an out-of-order processor to flush its
 pipeline, discarding the results of operations that have already
 executed but not committed to the processor’s architectural state. For
-example, suppose that while executing B in the out-of-order sequence
-A;C;B, the processor encounters an event that causes a pipeline flush.
-If C executed before B, the event may require C’s results to be
+example, suppose that while executing `B` in the out-of-order sequence
+`A;C;B`, the processor encounters an event that causes a pipeline flush.
+If `C` executed before `B`, the event may require `C`’s results to be
 discarded during the flush.
 
 When operations execute but do not commit to the processor’s
@@ -92,15 +99,15 @@ infer information about the operations that executed transiently. For
 example, the attacker may be able to infer program data that was
 accessed or used by those operations.
 
-## CWE-B: Transient Data Forwarding from an Operation that Triggers a Processor Event
+### CWE-B: Transient Data Forwarding from an Operation that Triggers a Processor Event
 
-### Description
+#### Description
 
 A processor event (for example, a fault or microcode assist) may allow
 incorrect data to be forwarded from the operation that triggered the
 event to operations that execute transiently.
 
-### Extended Description
+#### Extended Description
 
 Commodity processors may require assistance from microcode (or other
 processor design techniques) to execute certain operations. For example,
@@ -114,14 +121,14 @@ observable microarchitectural state in a manner that could allow an
 attacker to infer program data, such as the incorrect data forwarded by
 the operation that triggered the assist.
 
-## CWE-C: Transient Execution Influenced by Shared Microarchitectural Predictor State
+### CWE-C: Transient Execution Influenced by Shared Microarchitectural Predictor State
 
-### Description
+#### Description
 
 Shared microarchitectural predictor state may allow code in one hardware
 domain to influence transient execution in another domain.
 
-### Extended Description
+#### Extended Description
 
 When hardware domains (for example, processes or privilege rings) share
 microarchitectural predictor state, code in one domain may be able to
@@ -144,15 +151,15 @@ occur on another logical processor. Similar to the features that prevent
 sharing across domain transitions, these features may be always-on, on
 by default, or may require opt-in from software.
 
-## CWE-D: Microarchitectural Predictor Causes Transient Execution
+### CWE-D: Microarchitectural Predictor Causes Transient Execution
 
-### Description
+#### Description
 
 Microarchitectural predictors may allow incorrect operations (or correct
 operations with incorrect data) to execute transiently after a
 misprediction.
 
-### Extended Description
+#### Extended Description
 
 Many commodity processors use microarchitectural predictors (for
 example, branch predictors) to improve performance. Operations that
@@ -183,7 +190,8 @@ that user’s data to become inferable. In most cases, these weaknesses
 can be mitigated by isolating each user’s code and data in separate
 hardware domains.
 
-# Author’s Notes
+Author’s Notes
+--------------------------------
 
   - When writing these descriptions, I have tried as much as possible to
     avoid introducing new terms, or terms that are specific to Intel’s
@@ -252,7 +260,8 @@ hardware domains.
         for developers, and to generalize the mitigation strategies that
         have been adopted throughout the industry.
 
-# Applying These New CWEs to Intel’s Transient Execution CVEs
+Applying These New CWEs to Intel’s Transient Execution CVEs
+-----------------------------------------------------------
 
 The following is a partial survey of Intel’s existing CVEs that pertain
 to transient execution. Each entry in the table compares the current CVE
@@ -289,40 +298,42 @@ CVEs issued prior to 2021 did not use CWE descriptions, indicated by
 | CVE-2022-29901 (RSB underflow, Retbleed)                                           | \[CWE-1303\] Non-transparent sharing of branch predictor targets between contexts in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                              | \[CWE-C for processors w/o eIBRS\] Shared return stack buffer state may allow code in one hardware domain to influence transient execution in another domain; \[CWE-D for processors w/ eIBRS\] RSB alternate behavior may allow incorrect operations to execute transiently after an indirect branch misprediction. |
 | CVE-2022-26373 (Post-barrier RSB)                                                  | \[CWE-1303\] Non-transparent sharing of return predictor targets between contexts in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                              | \[CWE-C\] Shared return stack buffer state may allow code that executes before a prediction barrier to influence transient execution after the prediction barrier.                                                                                                                                                   |
 
-# References
+References
+--------------------------------
 
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
+1.  MITRE, "About CWE," 27 September 2022. \[Online\]. Available:
+    https://cwe.mitre.org/about/index.html. \[Accessed 16 November
+    2022\].
 
-\[1\] MITRE, "About CWE," 27 September 2022. \[Online\]. Available:
-https://cwe.mitre.org/about/index.html. \[Accessed 16 November
-2022\].\[2\] O. Kirzner and A. Morrison, "An Analysis of Speculative
-Type Confusion Vulnerabilities in the Wild," in *30th USENIX Security
-Symposium (USENIX Security 21)*, 2021. \[3\] M. Schwarz, M. Schwarzl, M.
-Lipp, J. Masters and D. Gruss, "NetSpectre: Read Arbitrary Memory over
-Network," in *ESORICS 2019: 24th European Symposium on Research in
-Computer Security*, Luxembourg, Luxembourg, 2019. \[4\] Intel
-Corporation., "Refined Speculative Execution Terminology," Intel, 5
-April 2021. \[Online\]. Available:
-https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/best-practices/refined-speculative-execution-terminology.html.\[5\]
-Intel Corporation, "Intel® 64 and IA-32 Architectures Software Developer
-Manuals," 2022 30 September. \[Online\]. Available:
-https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html.
-\[Accessed 2022 21 November\].\[6\] AMD, "Developer Guides, Manuals &
-ISA Documents," \[Online\]. Available:
-https://developer.amd.com/resources/developer-guides-manuals/.
-\[Accessed 21 November 2022\].
+2.  O. Kirzner and A. Morrison, "An Analysis of Speculative Type
+    Confusion Vulnerabilities in the Wild," in *30th USENIX Security
+    Symposium (USENIX Security 21)*, 2021.
 
-# Appendix
+3.  M. Schwarz, M. Schwarzl, M. Lipp, J. Masters and D. Gruss,
+    "NetSpectre: Read Arbitrary Memory over Network," in *ESORICS 2019:
+    24th European Symposium on Research in Computer Security*,
+    Luxembourg, Luxembourg, 2019.
 
-## Submission Guidelines for Individual Elements (Provided by MITRE)
+4.  Intel Corporation., "Refined Speculative Execution Terminology,"
+    Intel, 5 April 2021. \[Online\]. Available:
+    https://www.intel.com/content/www/us/en/developer/articles/technical/softwaresecurity-guidance/best-practices/refined-speculative-execution-terminology.html.
 
-### Name
+5.  Intel Corporation, "Intel® 64 and IA-32 Architectures Software
+    Developer Manuals," 2022 30 September. \[Online\]. Available:
+    https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html.
+    \[Accessed 2022 21 November\].
+
+6.  AMD, "Developer Guides, Manuals & ISA Documents," \[Online\].
+    Available:
+    https://developer.amd.com/resources/developer-guides-manuals/.
+    \[Accessed 21 November 2022\].
+
+Appendix
+--------------------------------
+
+### Submission Guidelines for Individual Elements (Provided by MITRE)
+
+#### Name
 
 Ideally, the name focuses on the weakness/mistake - not the attack.
 Minimize use of ambiguous words to keep the name short. Where feasible,
@@ -331,7 +342,7 @@ theory documents. The name should include: (1) the intended behavior of
 the code, (2) the mistake (i.e. weakness), (3) the affected resource (if
 relevant), and (4) the affected technology (if relevant).
 
-### Summary
+#### Summary
 
 The summary consists of only one or two sentences that describe the
 weakness itself, i.e. the mistake that is made. Often, the summary will
@@ -347,7 +358,7 @@ absence of a mitigation, or (3) the technical impact. If a summary has a
 strong reliance on this information, this may be an indicator that the
 entry is not weakness-focused.
 
-### Extended Description
+#### Extended Description
 
 The extended description provides additional explanation for the
 weakness. Generally, the intended audience is a developer/designer who
