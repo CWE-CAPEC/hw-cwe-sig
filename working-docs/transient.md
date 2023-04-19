@@ -55,143 +55,235 @@ For example, consider
     microarchitectural state, which is impractical or infeasible for
     many vulnerabilities, including BCB.
 
-The objective of this document is to define
-**<span class="underline">four</span>** new CWEs that address the root
+The objective of this document is to define **four** new CWEs that address the root
 causes of transient execution attacks, and with language that is
 sufficiently generic to benefit the entire CWE community.
 
 New CWE Proposals
 --------------------------------
 
-### CWE-A: Processor Event Causes Transient Execution
+### CWE-A: Transient Execution Exposes Data Protected by Hardware
 
 #### Description
 
-A processor event may allow subsequent operations to execute transiently
-(the operations execute without committing to architectural state).
+A processor event may allow transient operations to access data protected by
+hardware, potentially exposing the data.
 
 #### Extended Description
 
-Many commodity processors execute operations (such as instructions,
-etc.) out-of-order. For example, a processor may fetch the sequence of
-instructions `A;B;C`, but then execute them in a different order, such as
-`A;C;B`. This out-of-order execution sequence may produce the same result
-as an in-order sequence if the input to `C` does not depend on the output
-of `B`. Although operations on these processors may execute out-of-order,
-they commit in-order to the processor’s architectural state. Hence, all
-operations appear to software as though they had been executed in-order
-by the processor.
+Many commodity processors have Instruction Set Architecture (ISA) features that
+protect software components from one another. These features can include memory
+segmentation, virtual memory, privilege rings, trusted execution environments,
+and virtual machines, among others. For example, virtual memory provides each
+process with its own address space, which prevents processes from accessing one
+another's private data.
 
-Some processor events can cause an out-of-order processor to flush its
-pipeline, discarding the results of operations that have already
-executed but not committed to the processor’s architectural state. For
-example, suppose that while executing `B` in the out-of-order sequence
-`A;C;B`, the processor encounters an event that causes a pipeline flush.
-If `C` executed before `B`, the event may require `C`’s results to be
-discarded during the flush.
+When transient operations permit access to data that is protected by the ISA,
+this can violate users' expectations of the ISA feature that is bypassed. For
+example, if transient operations can access private data belonging to
+a victim (for example, another process), then the operations' microarchitectural
+side effects may correspond to the accessed data. If an attacker is able to
+trigger these transient operations and observe their side effects through a
+covert channel, then the attacker may be able to infer the victim's data.
 
-When operations execute but do not commit to the processor’s
-architectural state, this is commonly referred to as *transient
-execution*. Operations that execute transiently may have
-microarchitectural side effects that can be detected using timing or
-power analysis techniques. These techniques may allow an attacker to
-infer information about the operations that executed transiently. For
-example, the attacker may be able to infer program data that was
-accessed or used by those operations.
+#### Background Details
 
-### CWE-B: Transient Data Forwarding from an Operation that Triggers a Processor Event
+When operations execute but do not commit to the processor’s architectural
+state, this is commonly referred to as *transient execution*. This behavior can
+occur when the processor mis-predicts an outcome (such as a branch target), when
+a processor event (such as an exception) is signaled after younger operations
+have already executed, or for other reasons. Operations that execute transiently
+may have microarchitectural side effects that can be detected using timing or
+power analysis techniques. These techniques may allow an attacker to infer
+information about the operations that executed transiently. For example, the
+attacker may be able to infer program data that was accessed or used by those
+operations.
+
+#### Examples
+
+TODO
+
+### CWE-B: Transient Execution Exposes Data Protected by Software
 
 #### Description
 
-A processor event (for example, a fault or microcode assist) may allow
-incorrect data to be forwarded from the operation that triggered the
-event to operations that execute transiently.
+A processor event may allow transient operations to access data protected by
+software, potentially exposing the data.
 
 #### Extended Description
 
-Commodity processors may require assistance from microcode (or other
-processor design techniques) to execute certain operations. For example,
-processors that implement virtual memory may use microcode to perform
-virtual-to-physical address translation, check for faults, etc. Prior to
-or concurrent with the microcode assist, some processors may allow
-incorrect data to be forwarded from the operation that triggered the
-assist to operations that execute transiently and are flushed by the
-time the assist completes. These transient operations can affect
-observable microarchitectural state in a manner that could allow an
-attacker to infer program data, such as the incorrect data forwarded by
-the operation that triggered the assist.
+Software may use a variety of techniques to preserve the confidentiality of
+private data that is accessible within the current processor context. For
+example, the memory safety and type safety properties of some high-level
+programming languages help to prevent software written in those languages from
+exposing private data. As a second example, software sandboxes may co-locate
+multiple users' software within a single process. One user's software may be
+permitted by the processor's Instruction Set Architecture (ISA) to access
+another user's data (because the software shares the same address space), but
+the sandbox prevents these accesses by using software techniques such as bounds
+checking and address masking.
+
+If transient operations can access data that is protected by software,
+then the operations' microarchitectural side effects may correspond to the data.
+If an attacker is able to trigger these transient operations and observe their
+side effects through a covert channel, then the attacker may be able to infer
+the data. For example, an attacker process may induce transient execution in a
+victim process that causes the victim to inadvertently access and then expose
+its private data via a covert channel. In the software sandbox example, an
+attacker sandbox may induce transient execution in its own code, allowing it to
+transiently access and expose data in a victim sandbox that shares the same
+process.
+
+When transient operations permit access to data that is protected by software,
+this can violate users' expectations of the software's security. If the
+transient execution behavior that allows the access is not properly documented
+by the hardware vendor, this can violate the software vendor's expectation of
+how the hardware should behave.
+
+#### Background Details
+
+When operations execute but do not commit to the processor’s architectural
+state, this is commonly referred to as *transient execution*. This behavior can
+occur when the processor mis-predicts an outcome (such as a branch target), when
+a processor event (such as an exception) is signaled after younger operations
+have already executed, or for other reasons. Operations that execute transiently
+may have microarchitectural side effects that can be detected using timing or
+power analysis techniques. These techniques may allow an attacker to infer
+information about the operations that executed transiently. For example, the
+attacker may be able to infer program data that was accessed or used by those
+operations.
+
+#### Examples
+
+1. Speculative Code Store Bypass (SCSB)
+2. Floating-point Value Injection (FPVI)
 
 ### CWE-C: Transient Execution Influenced by Shared Microarchitectural Predictor State
 
 #### Description
 
-Shared microarchitectural predictor state may allow code in one hardware
-domain to influence transient execution in another domain.
+Shared microarchitectural predictor state may allow code to influence transient
+execution across a hardware boundary, potentially exposing data that is
+accessible beyond the boundary.
 
 #### Extended Description
 
-When hardware domains (for example, processes or privilege rings) share
-microarchitectural predictor state, code in one domain may be able to
-influence microarchitectural predictor behavior in another domain. If
-the predictor can cause transient execution, then shared predictor state
-may allow an attacker to influence transient execution in an
-attacker-chosen domain, and in a manner that could allow the attacker to
-infer program data from that domain.
+Many commodity processors have Instruction Set Architecture (ISA) features that
+protect software components from one another. These features can include memory
+segmentation, virtual memory, privilege rings, trusted execution environments,
+and virtual machines, among others. For example, virtual memory provides each
+process with its own address space, which prevents processes from accessing one
+another's private data. Many of these features can be used to form
+hardware-enforced security boundaries between software components. 
 
-Many commodity processors have features which prevent microarchitectural
-predictions that occur before a domain transition from influencing
-predictions that occur after the domain transition. These features may
-be always-on, on by default, or may require opt-in from software.
+When separate software components (for example, two processes) share
+microarchitectural predictor state across a hardware boundary, code in one
+component may be able to influence microarchitectural predictor behavior in
+another component. If the predictor can cause transient execution, then shared
+predictor state may allow an attacker to influence transient execution in a
+victim, and in a manner that could allow the attacker to infer private data from
+the victim.
 
-Some commodity processors may also share microarchitectural predictors
-(possibly including predictor state) between logical processors. These
-processors may have features that prevent microarchitectural predictions
-that occur on one logical processor from influencing predictions that
-occur on another logical processor. Similar to the features that prevent
-sharing across domain transitions, these features may be always-on, on
+Predictor state may be shared when the processor transitions from one component
+to another (for example, when a process makes a system call to enter the
+kernel). Many commodity processors have features which prevent
+microarchitectural predictions that occur before a boundary from influencing
+predictions that occur after the boundary. These features may be always-on, on
 by default, or may require opt-in from software.
 
-### CWE-D: Microarchitectural Predictor Causes Transient Execution
+Predictor state may also be shared between hardware threads (for example,
+sibling SMT threads). This sharing may be benign if the hardware threads are
+simultaneously executing in the same software component, or it could expose a
+vulnerability if it allows different software components to share predictor
+state. Processors that share microarchitectural predictors between hardware
+threads may have features that prevent microarchitectural predictions that occur
+on one hardware thread from influencing predictions that occur on another
+hardware thread. Similar to the features that prevent sharing across
+transitions, these features may be always-on, on by default, or may require
+opt-in from software.
+
+#### Background Details
+
+When operations execute but do not commit to the processor’s architectural
+state, this is commonly referred to as *transient execution*. This behavior can
+occur when the processor mis-predicts an outcome (such as a branch target), when
+a processor event (such as an exception) is signaled after younger operations
+have already executed, or for other reasons. Operations that execute transiently
+may have microarchitectural side effects that can be detected using timing or
+power analysis techniques. These techniques may allow an attacker to infer
+information about the operations that executed transiently. For example, the
+attacker may be able to infer program data that was accessed or used by those
+operations.
+
+#### Examples
+
+1. Branch Target Injection (BTI)
+
+### CWE-D: Transient Execution Caused by Microarchitectural Predictor
 
 #### Description
 
-Microarchitectural predictors may allow incorrect operations (or correct
-operations with incorrect data) to execute transiently after a
-misprediction.
+Microarchitectural predictors may allow operations to execute transiently after
+a misprediction, potentially exposing data.
 
 #### Extended Description
 
-Many commodity processors use microarchitectural predictors (for
-example, branch predictors) to improve performance. Operations that
-execute after a misprediction are not committed to the processor’s
-architectural state and their results are discarded. However, these
-transient operations can affect observable microarchitectural state in a
-manner that could allow an attacker to infer program data.
+Many commodity processors use microarchitectural predictors (for example, branch
+predictors) to improve performance. After a misprediction, the processor may
+continue to execute operations until it discovers that the prediction was
+incorrect, at which point it will discard the architectural results of those
+operations. However, if these *transient* operations can access data
+protected by hardware or software, then the operations' microarchitectural side
+effects may correspond to the data. If an attacker is able to trigger these
+transient operations and observe their side effects through a covert channel,
+then the attacker may be able to infer the data.  Moreover, if the predictor's
+transient execution behavior is not properly documented by the hardware vendor,
+this can violate software vendors' expectations of how the hardware should
+behave.
 
-Some commodity processors may provide features that prevent
-microarchitectural predictors from allowing program data to become
-inferable by an attacker. For example, a processor may allow software to
-opt-in to temporarily disable a microarchitectural predictor. Many
-instruction set architectures also provide serialization instructions
-that can be used by software to prevent predictions made prior to the
-serialization instruction from causing transient execution after the
-instruction. Some modern compilers can be directed to automatically
-instrument their output to mitigate the effects of transient execution
-caused by microarchitectural predictors, especially branch predictors.
+Some commodity processors may provide features that prevent microarchitectural
+predictors from allowing program data to become inferable by an attacker. For
+example, a processor may allow software to opt-in to temporarily disable a
+microarchitectural predictor. Many processors also provide serialization
+instructions that can be used by software to prevent predictions made prior to
+the serialization instruction from causing transient execution after the
+instruction. Some modern compilers can be directed to automatically instrument
+their output to mitigate the effects of transient execution caused by
+microarchitectural predictors.
 
-Developers of sandbox or managed runtime software should exercise
-caution when allowing multiple users to run code within the same
-hardware domain. For example, one user’s code may be able to train a
-microarchitectural predictor in a manner that allows it to transiently
-read another user’s data. As a second example, one user’s code may be
-able to train a microarchitectural predictor in a manner that influences
-transient execution when another user runs code, potentially causing
-that user’s data to become inferable. In most cases, these weaknesses
-can be mitigated by isolating each user’s code and data in separate
-hardware domains.
+Developers of sandbox or managed runtime software should exercise caution when
+relying on software techniques (such as bounds checking) to prevent code in one
+sandbox from accessing private data in another sandbox. For example, an attacker
+sandbox may be able to train a microarchitectural predictor in a manner that
+allows it to transiently read a victim sandbox's private data. As a second
+example, an attacker may be able to train a microarchitectural predictor in a
+manner that causes the victim to inadvertently access and then expose its
+private data via a covert channel. In most cases these vulnerabilities can be
+mitigated by using hardware to protect sandboxes from one another (for example,
+by deploying each sandbox in a separate process).
+
+#### Background Details
+
+When operations execute but do not commit to the processor’s architectural
+state, this is commonly referred to as *transient execution*. This behavior can
+occur when the processor mis-predicts an outcome (such as a branch target), when
+a processor event (such as an exception) is signaled after younger operations
+have already executed, or for other reasons. Operations that execute transiently
+may have microarchitectural side effects that can be detected using timing or
+power analysis techniques. These techniques may allow an attacker to infer
+information about the operations that executed transiently. For example, the
+attacker may be able to infer program data that was accessed or used by those
+operations.
 
 Author’s Notes
 --------------------------------
+
+### Notes About this Updated Proposal
+
+  - The term "confused deputy" would be useful to describe some exploits that could fall within CWE-B and CWE-D, but this term does not appear in the CWE glossary. This term could be useful for other CWEs as well.
+  - The novel term "hardware domain" was removed from this proposal. This term is difficult to define and, once defined, becomes too rigid. Instead, this proposal contrasts "data protected by hardware" with "data protected by software." This revised language is intended to provide hardware designers with flexibility to specify what their hardware is intended to protect.
+
+### Notes about the Original Proposal
 
   - When writing these descriptions, I have tried as much as possible to
     avoid introducing new terms, or terms that are specific to Intel’s
@@ -260,10 +352,10 @@ Author’s Notes
         for developers, and to generalize the mitigation strategies that
         have been adopted throughout the industry.
 
-Applying These New CWEs to Intel’s Transient Execution CVEs
------------------------------------------------------------
+Applying These New CWEs to A Variety of Transient Execution CVEs
+----------------------------------------------------------------
 
-The following is a partial survey of Intel’s existing CVEs that pertain
+The following is a partial survey of existing CVEs that pertain
 to transient execution. Each entry in the table compares the current CVE
 description against a hypothetical CVE description that derives from the
 draft CWE language introduced earlier in this document. Note that many
@@ -272,31 +364,31 @@ CVEs issued prior to 2021 did not use CWE descriptions, indicated by
 
 | CVE                                                                                | Current Description                                                                                                                                                                                                                                                                                  | New Description                                                                                                                                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CVE-2017-5715 (Rogue Data Cache Load, RDCL, Meltdown, Variant 3)                   | \[No CWE\] Systems with microprocessors utilizing speculative execution and indirect branch prediction may allow unauthorized disclosure of information to an attacker with local user access via a side-channel analysis of the data cache.                                                         | \[CWE-B\] A fault may allow data in the L1D to be forwarded from the operation that triggered the fault to operations that execute transiently.                                                                                                                                                                      |
-| CVE-2017-5753 (Bounds Check Bypass, BCB, Spectre v1)                               | \[No CWE\] Systems with microprocessors utilizing speculative execution and indirect branch prediction may allow unauthorized disclosure of information to an attacker with local user access via a side-channel analysis of the data cache.                                                         | \[CWE-D\] Microarchitectural conditional branch predictors may allow incorrect operations to execute transiently after a misprediction.                                                                                                                                                                              |
-| CVE-2017-5754 (Branch Target Injection, BTI, Spectre v2)                           | \[No CWE\] Systems with microprocessors utilizing speculative execution and indirect branch prediction may allow unauthorized disclosure of information to an attacker with local user access via a side-channel analysis of the data cache.                                                         | \[CWE-C\] Shared indirect branch predictor state may allow code in one hardware domain to influence transient execution in another domain.                                                                                                                                                                           |
-| CVE-2018-3639 (Speculative Store Bypass, SSB, Spectre v4)                          | \[No CWE\] Systems with microprocessors utilizing speculative execution and speculative execution of memory reads before the addresses of all prior memory writes are known may allow unauthorized disclosure of information to an attacker with local user access via a side-channel analysis.      | \[CWE-D\] Microarchitectural memory disambiguation predictors may allow operations to execute transiently with stale data after a misprediction.                                                                                                                                                                     |
-| CVE-2018-3640 (Rogue System Register Read, RSRE, Spectre v3a)                      | \[No CWE\] Systems with microprocessors utilizing speculative execution and that perform speculative reads of system registers may allow unauthorized disclosure of system parameters to an attacker with local user access via a side-channel analysis.                                             | \[CWE-B\] A fault may allow system register data to be forwarded from the operation that triggered the fault to operations that execute transiently.                                                                                                                                                                 |
-| CVE-2018-3615 (L1 Terminal Fault, L1TF – SGX, Foreshadow)                          | \[No CWE\] Systems with microprocessors utilizing speculative execution and Intel® software guard extensions (Intel® SGX) may allow unauthorized disclosure of information residing in the L1 data cache from an enclave to an attacker with local user access via a side-channel analysis.          | \[CWE-B\] A fault may allow SGX enclave data to be forwarded from the operation that triggered the fault to operations that execute transiently.                                                                                                                                                                     |
-| CVE-2018-3620 (L1 Terminal Fault, L1TF – OS/SMM)                                   | \[No CWE\] Systems with microprocessors utilizing speculative execution and address translations may allow unauthorized disclosure of information residing in the L1 data cache to an attacker with local user access via a terminal page fault and a side-channel analysis.                         | \[CWE-B\] A fault may allow OS/SMM data to be forwarded from the operation that triggered the fault to operations that execute transiently.                                                                                                                                                                          |
-| CVE-2018-3646 (L1 Terminal Fault, L1TF – VMM)                                      | \[No CWE\] Systems with microprocessors utilizing speculative execution and address translations may allow unauthorized disclosure of information residing in the L1 data cache to an attacker with local user access with guest OS privilege via a terminal page fault and a side-channel analysis. | \[CWE-B\] A fault may allow VMM data to be forwarded from the operation that triggered the fault to operations that execute transiently.                                                                                                                                                                             |
-| CVE-2018-12126 (Microarchitectural Store Buffer Data Sampling, MSBDS, Fallout)     | \[No CWE\] Store buffers on some microprocessors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                                  | \[CWE-B\] A fault or microcode assist in some Intel® processors may allow stale data in a store buffer to be forwarded from a load operation to operations that execute transiently.                                                                                                                                 |
-| CVE-2018-12127 (Microarchitectural Load Port Data Sampling, MLPDS, RIDL)           | \[No CWE\] Load ports on some microprocessors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                                     | \[CWE-B\] A fault or microcode assist in some Intel® processors may allow stale data in a load port to be forwarded from a load operation to operations that execute transiently.                                                                                                                                    |
-| CVE-2018-12130 (Microarchitectural Fill Buffer Data Sampling, MFBDS, ZombieLoad)   | \[No CWE\] Fill buffers on some microprocessors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                                   | \[CWE-B\] A fault or microcode assist in some Intel® processors may allow stale data in a fill buffer to be forwarded from a load operation to operations that execute transiently.                                                                                                                                  |
-| CVE-2019-11091 (Microarchitectural Data Sampling from Uncacheable Memory, MDSUM)   | \[No CWE\] Uncacheable memory on some microprocessors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                             | \[CWE-B\] A fault or microcode assist in some Intel® processors may allow incorrect data to be forwarded from a load operation to operations that execute transiently.                                                                                                                                               |
-| CVE-2019-1135 (TSX Asynchronous Abort, TAA)                                        | \[No CWE\] TSX Asynchronous Abort condition on some CPUs utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                          | \[CWE-B\] A TSX Asynchronous Abort in some Intel® processors may allow stale data to be forwarded from a load operation to operations that execute transiently.                                                                                                                                                      |
-| CVE-2020-0543 (Special Register Buffer Data Sampling, SRBDS, Crosstalk)            | \[No CWE\] Incomplete cleanup from specific special register read operations in some Intel(R) Processors may allow an authenticated user to potentially enable information disclosure via local access.                                                                                              | \[CWE-B\] A fault, microcode assist, or abort in some Intel® processors may allow special register data to be forwarded from a load operation to operations that execute transiently.                                                                                                                                |
-| CVE-2020-0548 (Vector Register Sampling)                                           | \[No CWE\] Cleanup errors in some Intel® Processors may allow an authenticated user to potentially enable information disclosure via local access.                                                                                                                                                   | \[CWE-B\] A fault, microcode assist, or abort in some Intel® processors may allow data from a vector register to be forwarded from a load operation to operations that execute transiently.                                                                                                                          |
-| CVE-2020-0549 (L1D Eviction Sampling)                                              | \[No CWE\] Cleanup errors in some data cache evictions for some Intel® Processors may allow an authenticated user to potentially enable information disclosure via local access.                                                                                                                     | \[CWE-B\] A fault, microcode assist, or abort in some Intel® processors may allow data from the L1D cache to be forwarded from a load operation to operations that execute transiently.                                                                                                                              |
-| CVE-2020-0550 (Snoop-assisted L1D)                                                 | \[No CWE\] Improper data forwarding in some data cache for some Intel® Processors may allow an authenticated user to potentially enable information disclosure via local access.                                                                                                                     | \[CWE-B\] A fault, microcode assist, or abort in some Intel® processors may allow data from the L1D cache to be forwarded from a load operation to operations that execute transiently.                                                                                                                              |
-| CVE-2020-0551 (Load Value Injection, LVI)                                          | \[No CWE\] Load value injection in some Intel(R) Processors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                       | \[CWE-B\] A fault, microcode assist, or abort in some Intel® processors may allow incorrect data to be forwarded from a load operation to operations that execute transiently.                                                                                                                                       |
-| CVE-2021-0086 (Floating-Point Value Injection, FPVI)                               | \[CWE-204\] Observable response discrepancy in floating-point operations for some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                                      | \[CWE-B\] A microcode assist in some Intel® processors may allow incorrect data to be forwarded from a floating-point operation to operations that execute transiently.                                                                                                                                              |
-| CVE-2021-0089 (Speculative Code Store Bypass, SCSB)                                | \[CWE-204\] Observable response discrepancy in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                                                                    | \[CWE-A\] A machine clear triggered by self-modifying code may allow subsequent operations to execute transiently.                                                                                                                                                                                                   |
-| CVE-2021-33149 (Speculative Load Disordering, SLD, Speculative Cross-Store Bypass) | \[CWE-205\] Observable behavioral discrepancy in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                                                                  | \[CWE-A\] A machine clear triggered by a memory ordering violation may allow subsequent operations to execute transiently.                                                                                                                                                                                           |
-| CVE-2022-0001 (Branch History Injection, BHI, Spectre-BHB)                         | \[CWE-1303\] Non-transparent sharing of branch predictor selectors between contexts in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                            | \[CWE-C\] Shared branch history state may allow code in one hardware domain to influence transient execution in another domain.                                                                                                                                                                                      |
-| CVE-2022-0002 (Intra-mode Branch Target Injection, IMBTI)                          | \[CWE-1303\] Non-transparent sharing of branch predictor within a context in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                                      | \[CWE-D\] Microarchitectural indirect branch predictors may allow incorrect operations to execute transiently after a misprediction.                                                                                                                                                                                 |
-| CVE-2022-29901 (RSB underflow, Retbleed)                                           | \[CWE-1303\] Non-transparent sharing of branch predictor targets between contexts in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                              | \[CWE-C for processors w/o eIBRS\] Shared return stack buffer state may allow code in one hardware domain to influence transient execution in another domain; \[CWE-D for processors w/ eIBRS\] RSB alternate behavior may allow incorrect operations to execute transiently after an indirect branch misprediction. |
-| CVE-2022-26373 (Post-barrier RSB)                                                  | \[CWE-1303\] Non-transparent sharing of return predictor targets between contexts in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                              | \[CWE-C\] Shared return stack buffer state may allow code that executes before a prediction barrier to influence transient execution after the prediction barrier.                                                                                                                                                   |
+| CVE-2017-5715 (Rogue Data Cache Load, RDCL, Meltdown, Variant 3)                   | \[No CWE\] Systems with microprocessors utilizing speculative execution and indirect branch prediction may allow unauthorized disclosure of information to an attacker with local user access via a side-channel analysis of the data cache.                                                         | \[CWE-A\] A fault may allow transient user-mode operations to access kernel data cached in the L1D, potentially exposing the data. |
+| CVE-2017-5753 (Bounds Check Bypass, BCB, Spectre v1)                               | \[No CWE\] Systems with microprocessors utilizing speculative execution and indirect branch prediction may allow unauthorized disclosure of information to an attacker with local user access via a side-channel analysis of the data cache.                                                         | \[CWE-D\] Microarchitectural conditional branch predictors may allow operations to execute transiently after a misprediction, potentially exposing data.  |
+| CVE-2017-5754 (Branch Target Injection, BTI, Spectre v2)                           | \[No CWE\] Systems with microprocessors utilizing speculative execution and indirect branch prediction may allow unauthorized disclosure of information to an attacker with local user access via a side-channel analysis of the data cache.                                                         | \[CWE-C\] Shared microarchitectural indirect branch predictor state may allow code to influence transient execution across a process, VM, or privilege boundary, potentially exposing data that is accessible beyond the boundary. |
+| CVE-2018-3639 (Speculative Store Bypass, SSB, Spectre v4)                          | \[No CWE\] Systems with microprocessors utilizing speculative execution and speculative execution of memory reads before the addresses of all prior memory writes are known may allow unauthorized disclosure of information to an attacker with local user access via a side-channel analysis.      | \[CWE-D\] Microarchitectural memory disambiguation predictors may allow operations to execute transiently after a misprediction, potentially exposing data. |
+| CVE-2018-3640 (Rogue System Register Read, RSRE, Spectre v3a)                      | \[No CWE\] Systems with microprocessors utilizing speculative execution and that perform speculative reads of system registers may allow unauthorized disclosure of system parameters to an attacker with local user access via a side-channel analysis.                                             | \[CWE-A\] A fault may allow transient user-mode operations to access system register data, potentially exposing the data. |
+| CVE-2018-3615 (L1 Terminal Fault, L1TF – SGX, Foreshadow)                          | \[No CWE\] Systems with microprocessors utilizing speculative execution and Intel® software guard extensions (Intel® SGX) may allow unauthorized disclosure of information residing in the L1 data cache from an enclave to an attacker with local user access via a side-channel analysis.          | \[CWE-A\] A fault may allow transient non-enclave operations to access SGX enclave data, potentially exposing the data. |
+| CVE-2018-3620 (L1 Terminal Fault, L1TF – OS/SMM)                                   | \[No CWE\] Systems with microprocessors utilizing speculative execution and address translations may allow unauthorized disclosure of information residing in the L1 data cache to an attacker with local user access via a terminal page fault and a side-channel analysis.                         | \[CWE-A\] A fault may allow transient user-mode operations to access OS/SMM data, potentially exposing the data. |
+| CVE-2018-3646 (L1 Terminal Fault, L1TF – VMM)                                      | \[No CWE\] Systems with microprocessors utilizing speculative execution and address translations may allow unauthorized disclosure of information residing in the L1 data cache to an attacker with local user access with guest OS privilege via a terminal page fault and a side-channel analysis. | \[CWE-A\] A fault may allow transient user-mode/guest operations to access VMM data, potentially exposing the data. |
+| CVE-2018-12126 (Microarchitectural Store Buffer Data Sampling, MSBDS, Fallout)     | \[No CWE\] Store buffers on some microprocessors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                                  | \[CWE-A\] A fault or microcode assist may allow transient operations to access data that the actor is not permitted to access via in a microarchitectural store buffer, potentially exposing the data. |
+| CVE-2018-12127 (Microarchitectural Load Port Data Sampling, MLPDS, RIDL)           | \[No CWE\] Load ports on some microprocessors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                                     | \[CWE-A\] A fault or microcode assist may allow transient operations to access data that the actor is not permitted to access via a microarchitectural load port, potentially exposing the data. |
+| CVE-2018-12130 (Microarchitectural Fill Buffer Data Sampling, MFBDS, ZombieLoad)   | \[No CWE\] Fill buffers on some microprocessors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                                   | \[CWE-A\] A fault or microcode assist may allow transient operations to access data that the actor is not permitted to access via a microarchitectural fill buffer, potentially exposing the data. |
+| CVE-2019-11091 (Microarchitectural Data Sampling from Uncacheable Memory, MDSUM)   | \[No CWE\] Uncacheable memory on some microprocessors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                             | \[CWE-A\] A fault or microcode assist may allow transient reads from uncacheable (UC) memory to access data that the actor is not permitted to access, potentially exposing the data. |
+| CVE-2019-1135 (TSX Asynchronous Abort, TAA)                                        | \[No CWE\] TSX Asynchronous Abort condition on some CPUs utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                          | \[CWE-A\] A TSX Asynchronous Abort may allow transient operations to access that the actor is not permitted to access, potentially exposing the data. |
+| CVE-2020-0543 (Special Register Buffer Data Sampling, SRBDS, Crosstalk)            | \[No CWE\] Incomplete cleanup from specific special register read operations in some Intel(R) Processors may allow an authenticated user to potentially enable information disclosure via local access.                                                                                              | \[CWE-B\] A fault, microcode assist, or abort may allow transient operations to access special register data, potentially exposing the data |
+| CVE-2020-0548 (Vector Register Sampling)                                           | \[No CWE\] Cleanup errors in some Intel® Processors may allow an authenticated user to potentially enable information disclosure via local access.                                                                                                                                                   | \[CWE-A\] A fault or microcode assist may allow transient operations to access stale vector register data that the actor is not permitted to access, potentially exposing the data.
+| CVE-2020-0549 (L1D Eviction Sampling)                                              | \[No CWE\] Cleanup errors in some data cache evictions for some Intel® Processors may allow an authenticated user to potentially enable information disclosure via local access.                                                                                                                     | \[CWE-A\] A fault, microcode assist, or abort may allow transient operations to access data in the L1D that the actor is not permitted to access, potentially exposing the data.
+| CVE-2020-0550 (Snoop-assisted L1D)                                                 | \[No CWE\] Improper data forwarding in some data cache for some Intel® Processors may allow an authenticated user to potentially enable information disclosure via local access.                                                                                                                     | \[CWE-A\] A fault, microcode assist, or abort may allow transient operations to access data in the L1D that the actor is not permitted to access, potentially exposing the data. |
+| CVE-2020-0551 (Load Value Injection, LVI)                                          | \[No CWE\] Load value injection in some Intel(R) Processors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access.                                                                                       | \[CWE-B\] A fault, microcode assist, or abort may allow a malicious actor to inject data into transient load operations executed by a victim, causing the victim to unintentionally access and potentially expose its own data. |
+| CVE-2021-0086 (Floating-Point Value Injection, FPVI)                               | \[CWE-204\] Observable response discrepancy in floating-point operations for some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                                      | \[CWE-B\] A microcode assist may allow a malicious actor to inject data into transient floating-point operations executed by a victim, causing the victim to access and potentially expose its own data. |
+| CVE-2021-0089 (Speculative Code Store Bypass, SCSB)                                | \[CWE-204\] Observable response discrepancy in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                                                                    | \[CWE-B\] A machine clear triggered by self-modifying code may allow transient operations to access data protected by software, potentially exposing the data. |
+| CVE-2021-33149 (Speculative Load Disordering, SLD, Speculative Cross-Store Bypass) | \[CWE-205\] Observable behavioral discrepancy in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                                                                  | \[CWE-B\] A machine clear triggered by a memory ordering violation may transient operations to access data protected by software, potentially exposing the data. |
+| CVE-2022-0001 (Branch History Injection, BHI, Spectre-BHB)                         | \[CWE-1303\] Non-transparent sharing of branch predictor selectors between contexts in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                            | \[CWE-C\] Shared branch history state may allow user-mode code to influence transient execution in the kernel, potentially exposing kernel data. |
+| CVE-2022-0002 (Intra-mode Branch Target Injection, IMBTI)                          | \[CWE-1303\] Non-transparent sharing of branch predictor within a context in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                                      | \[CWE-D\] Microarchitectural indirect branch predictors may allow incorrect operations to execute transiently after a misprediction, potentially exposing data.                                                                                                                                                                                 |
+| CVE-2022-29901 (RSB underflow, Retbleed)                                           | \[CWE-1303\] Non-transparent sharing of branch predictor targets between contexts in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                              | \[CWE-C for processors w/o eIBRS\] Shared microarchitectural return stack buffer state may allow user-mode code to influence transient execution in the kernel, potentially exposing kernel data; \[CWE-D for processors w/ eIBRS\] RSB alternate behavior may allow incorrect operations to execute transiently after an indirect branch misprediction, potentially exposing data. |
+| CVE-2022-26373 (Post-barrier RSB)                                                  | \[CWE-1303\] Non-transparent sharing of return predictor targets between contexts in some Intel® Processors may allow an authorized user to potentially enable information disclosure via local access.                                                                                              | \[CWE-C\] Shared return stack buffer state may allow code that executes before a prediction barrier to influence transient execution after the prediction barrier, potentially exposing data that is accessible beyond the barrier. |
 
 References
 --------------------------------
