@@ -4,19 +4,19 @@ A proposal by Intel, in collaboration with MITRE and the CWE community
 
 ## Motivation and Overview
 
-Common Weakness Enumeration (CWE) is “a community-developed list of
+Common Weakness Enumeration (CWE) is "a community-developed list of
 common software and hardware weakness types that have security
-ramifications” \[1\]. Common Vulnerability Enumeration (CVE) is a list
+ramifications" \[1\]. Common Vulnerability Enumeration (CVE) is a list
 of publicly known vulnerabilities. Each CVE is an instance of a CWE. For
 example,
 [CVE-2021-43618](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43618)
-is “GNU Multiple Precision Arithmetic Library (GMP) through 6.2.1 has an
-`mpz/inp\_raw.c` integer overflow and resultant buffer overflow via
-crafted input, leading to a segmentation fault on 32-bit platforms.”
+is "GNU Multiple Precision Arithmetic Library (GMP) through 6.2.1 has an
+`mpz/inp_raw.c` integer overflow and resultant buffer overflow via
+crafted input, leading to a segmentation fault on 32-bit platforms."
 This CVE is an instance of
 [CWE-787](https://cwe.mitre.org/data/definitions/787.html), whose
-description reads “The software writes data past the end, or before the
-beginning, of the intended buffer.”
+description reads "The software writes data past the end, or before the
+beginning, of the intended buffer."
 
 Whenever an organization (such as Intel) issues a CVE for a new
 transient execution attack, its description is expected to borrow
@@ -37,13 +37,13 @@ For example, consider
 (Bounds Check Bypass, or BCB):
 
   - Although BCB can affect conditional branches that do serve as
-    “security-critical protection mechanisms” (for example, in
+    "security-critical protection mechanisms" (for example, in
     software sandboxes), BCB can also affect branches that serve a
     functional purpose, such as dynamic type checking \[2\]. Therefore
     CWE-1037 is too narrow.
 
   - The conditional branch instructions affected by BCB are not
-    “hardware logic for error handling and security checks.” Hence
+    "hardware logic for error handling and security checks." Hence
     CWE-1264 does not apply.
 
   - BCB can be exploited over a network \[3\] without shared hardware
@@ -123,8 +123,8 @@ causing observable discrepancies in specific covert channels.
 **Effectiveness: Limited**  
 **Note:** This technique has many pitfalls. For example, InvisiSpec was
 an early attempt to mitigate this weakness by blocking
-“micro-architectural covert and side channels through the
-multiprocessor data cache hierarchy due to speculative loads” \[REF-1\].
+"micro-architectural covert and side channels through the
+multiprocessor data cache hierarchy due to speculative loads" \[REF-1\].
 Commodity processors and SoCs have many covert and side channels that
 exist outside of the data cache hierarchy. Even when some of these
 channels are blocked, others (such as execution ports \[REF-2\]) may
@@ -369,64 +369,64 @@ This vulnerability is described in more detail in \[REF-11\].
 #### References
 
 \[REF-1\] Mengjia Yan, Jiho Choi, Dimitrios Skarlatos, Adam Morrison,
-Christopher W. Fletcher, Josep Torrellas. “InvisiSpec: making
-speculative execution invisible in the cache hierarchy”.
-\<http://iacoma.cs.uiuc.edu/iacoma-papers/micro18.pdf\>
+Christopher W. Fletcher, Josep Torrellas. "InvisiSpec: making
+speculative execution invisible in the cache hierarchy".
+<<http://iacoma.cs.uiuc.edu/iacoma-papers/micro18.pdf>>
 
 \[REF-2\] Alejandro Cabrera Aldaya, Billy Bob Brumley, Sohaib ul Hassan,
-Cesar Pereida García, Nicola Tuveri. “Port Contention for Fun and
-Profit”. \<https://eprint.iacr.org/2018/1060.pdf\>
+Cesar Pereida García, Nicola Tuveri. "Port Contention for Fun and
+Profit". <<https://eprint.iacr.org/2018/1060.pdf>>
 
 \[REF-3\] Mohammad Behnia, Prateek Sahu, Riccardo Paccagnella, Jiyong
 Yu, Zirui Zhao, Xiang Zou, Thomas Unterluggauer, Josep Torrellas, Carlos
 Rozas, Adam Morrison, Frank Mckeen, Fangfei Liu, Ron Gabor, Christopher
-W. Fletcher, Abhishek Basak, Alaa Alameldeen. “Speculative Interference
-Attacks: Breaking Invisible Speculation Schemes”.
-\<https://arxiv.org/abs/2007.11818\>
+W. Fletcher, Abhishek Basak, Alaa Alameldeen. "Speculative Interference
+Attacks: Breaking Invisible Speculation Schemes".
+<<https://arxiv.org/abs/2007.11818>>
 
 \[REF-4\] Ross Mcilroy, Jaroslav Sevcik, Tobias Tebbi, Ben L. Titzer,
-Toon Verwaest. “Spectre is here to stay: An analysis of side-channels
-and speculative execution”. \<https://arxiv.org/pdf/1902.05178.pdf\>
+Toon Verwaest. "Spectre is here to stay: An analysis of side-channels
+and speculative execution". <<https://arxiv.org/pdf/1902.05178.pdf>>
 
-\[REF-5\] Intel Corporation. “Managed Runtime Speculative Execution Side
-Channel Mitigations”.
-\<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/runtime-speculative-side-channel-mitigations.html\>
+\[REF-5\] Intel Corporation. "Managed Runtime Speculative Execution Side
+Channel Mitigations".
+<<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/runtime-speculative-side-channel-mitigations.html>>
 
-\[REF-6\] The Clang Team. “Control Flow Integrity”.
-\<https://clang.llvm.org/docs/ControlFlowIntegrity.html\>
+\[REF-6\] The Clang Team. "Control Flow Integrity".
+<<https://clang.llvm.org/docs/ControlFlowIntegrity.html>>
 
-\[REF-7\] Intel Corporation. “Retpoline: A Branch Target Injection
-Mitigation”.
-\<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/retpoline-branch-target-injection-mitigation.html\>
+\[REF-7\] Intel Corporation. "Retpoline: A Branch Target Injection
+Mitigation".
+<<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/retpoline-branch-target-injection-mitigation.html>>
 
-\[REF-8\] The kernel development community. “Speculation”.
-\<https://docs.kernel.org/6.6/staging/speculation.html\>
+\[REF-8\] The kernel development community. "Speculation".
+<<https://docs.kernel.org/6.6/staging/speculation.html>>
 
-\[REF-9\] Chandler Carruth. “Speculative Load Hardening”.
-\<https://llvm.org/docs/SpeculativeLoadHardening.html\>
+\[REF-9\] Chandler Carruth. "Speculative Load Hardening".
+<<https://llvm.org/docs/SpeculativeLoadHardening.html>>
 
-\[REF-10\] Alyssa Milburn, Ke Sun, Henrique Kawakami. “You Cannot Always
+\[REF-10\] Alyssa Milburn, Ke Sun, Henrique Kawakami. "You Cannot Always
 Win the Race: Analyzing the LFENCE/JMP Mitigation for Branch Target
-Injection”. \< https://arxiv.org/abs/2203.04277\>
+Injection". <<https://arxiv.org/abs/2203.04277>>
 
 \[REF-11\] Hany Ragab, Enrico Barberis, Herbert Bos, Cristiano
-Giuffrida. “Rage Against the Machine Clear: A Systematic Analysis of
-Machine Clears and Their Implications for Transient Execution Attacks”.
-\<https://www.usenix.org/system/files/sec21-ragab.pdf\>.
+Giuffrida. "Rage Against the Machine Clear: A Systematic Analysis of
+Machine Clears and Their Implications for Transient Execution Attacks".
+<<https://www.usenix.org/system/files/sec21-ragab.pdf>>.
 
 \[REF-12\] Oleksii Oleksenko, Marco Guarnieri, Boris Köpf, Mark
-Silberstein. “Hide and Seek with Spectres: Efficient discovery of
-speculative information leaks with random testing”.
-\<https://arxiv.org/pdf/2301.07642.pdf\>
+Silberstein. "Hide and Seek with Spectres: Efficient discovery of
+speculative information leaks with random testing".
+<<https://arxiv.org/pdf/2301.07642.pdf>>
 
 \[REF-13\] Oleksii Oleksenko, Bohdan Trach, Mark Silberstein, Christof
-Fetzer. “SpecFuzz: Bringing Spectre-type vulnerabilities to the
-surface”. \<https://www.usenix.org/system/files/sec20-oleksenko.pdf\>
+Fetzer. "SpecFuzz: Bringing Spectre-type vulnerabilities to the
+surface". <<https://www.usenix.org/system/files/sec20-oleksenko.pdf>>
 
 \[REF-14\] Paul Kocher, Jann Horn, Anders Fogh, Daniel Genkin, Daniel
 Gruss, Werner Haas, Mike Hamburg, Moritz Lipp, Stefan Mangard, Thomas
-Prescher, Michael Schwarz, Yuval Yarom. “Spectre Attacks: Exploiting
-Speculative Execution”. \<https://spectreattack.com/spectre.pdf\>.
+Prescher, Michael Schwarz, Yuval Yarom. "Spectre Attacks: Exploiting
+Speculative Execution". <<https://spectreattack.com/spectre.pdf>>
 
 ### CWE-B: Exposure of Sensitive Information in Shared Microarchitectural Resource during Transient Execution
 
@@ -663,7 +663,7 @@ Vulnerable processors may return kernel data from a shared
 microarchitectural resource in line `4`, for example, from the
 processor’s L1 data cache. Since this vulnerability involves a race
 condition, the `mov` in line `4` may not always return kernel data (that
-is, whenever the check “wins” the race), in which case this
+is, whenever the check "wins" the race), in which case this
 demonstration code re-attempts the access in line `6`. The accessed data
 is multiplied by 4KB, a common page size, to make it easier to observe
 via a cache covert channel after the transmission in line `7`. The use
@@ -696,7 +696,7 @@ below. Under ordinary operating circumstances, code in exception level 0
 such as `TTBR0_EL1`. However, on some processors an earlier
 mis-prediction can cause the `MRS` instruction to transiently read the
 value in an EL1 register. In this example, a conditional branch (line 2)
-can be mis-predicted as “not taken” while waiting for a slow load (line
+can be mis-predicted as "not taken" while waiting for a slow load (line
 1). This allows `MRS` (line 3) to transiently read the value in the
 `TTBR0_EL1` register. The subsequent memory access (line 6) can allow
 the restricted register’s value to become observable, for example, over
@@ -736,36 +736,36 @@ predictor state.
 
 #### References
 
-\[REF-1\] The kernel development community. “Page Table Isolation
-(PTI)”. \<https://kernel.org/doc/html/next/x86/pti.html\>
+\[REF-1\] The kernel development community. "Page Table Isolation
+(PTI)". <<https://kernel.org/doc/html/next/x86/pti.html>>
 
 \[REF-2\] Stephan van Schaik, Alyssa Milburn, Sebastian Österlund,
 Pietro Frigo, Giorgi Maisuradze, Kaveh Razavi, Herbert Bos, Cristiano
-Giuffrida. “RIDL: Rogue In-Flight Data Load”.
-\<https://mdsattacks.com/files/ridl.pdf\>
+Giuffrida. "RIDL: Rogue In-Flight Data Load".
+<<https://mdsattacks.com/files/ridl.pdf>>
 
-\[REF-3\] Daniel Moghimi. “Downfall: Exploiting Speculative Data
-Gathering”.
-\<https://www.usenix.org/system/files/usenixsecurity23-moghimi.pdf\>
+\[REF-3\] Daniel Moghimi. "Downfall: Exploiting Speculative Data
+Gathering".
+<<https://www.usenix.org/system/files/usenixsecurity23-moghimi.pdf>>
 
-\[REF-4\] Neta Bar Kama, Roope Kaivola. “Hardware Security Leak
-Detection by Symbolic Simulation”.
-\<https://ieeexplore.ieee.org/document/9617727\>
+\[REF-4\] Neta Bar Kama, Roope Kaivola. "Hardware Security Leak
+Detection by Symbolic Simulation".
+<<https://ieeexplore.ieee.org/document/9617727>>
 
 \[REF-5\] Moritz Lipp, Michael Schwarz, Daniel Gruss, Thomas Prescher,
 Werner Haas, Stefan Mangard, Paul Kocher, Daniel Genkin, Yuval Yarom,
-Mike Hamburg. “Meltdown: Reading Kernel Memory from User Space”.
-\<https://meltdownattack.com/meltdown.pdf\>
+Mike Hamburg. "Meltdown: Reading Kernel Memory from User Space".
+<<https://meltdownattack.com/meltdown.pdf>>
 
-\[REF-6\] Intel Corporation. “Microarchitectural Data Sampling”.
-\<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/intel-analysis-microarchitectural-data-sampling.html\>
+\[REF-6\] Intel Corporation. "Microarchitectural Data Sampling".
+<<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/intel-analysis-microarchitectural-data-sampling.html>>
 
-\[REF-7\] Arm. “Whitepaper Cache Speculation Side-channels”.
-\<https://armkeil.blob.core.windows.net/developer/Files/pdf/Cache\_Speculation\_Side-channels\_03May18.pdf\>
+\[REF-7\] Arm. "Whitepaper Cache Speculation Side-channels".
+<<https://armkeil.blob.core.windows.net/developer/Files/pdf/Cache\_Speculation\_Side-channels\_03May18.pdf>>
 
-\[REF-8\] Intel Corporation. “Rogue System Register Read / CVE-2018-3640
-/ INTEL-SA-00115”.
-<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/rogue-system-register-read.html>
+\[REF-8\] Intel Corporation. "Rogue System Register Read / CVE-2018-3640
+/ INTEL-SA-00115".
+<<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/rogue-system-register-read.html>>
 
 ### CWE-C: Exposure of Sensitive Information caused by Incorrect Data Forwarding during Transient Execution
 
@@ -1023,20 +1023,20 @@ incorrect data that is not architecturally restricted.
 
 #### References
 
-\[REF-1\] The kernel development community. “Speculation”.
-\<https://docs.kernel.org/6.6/staging/speculation.html\>
+\[REF-1\] The kernel development community. "Speculation".
+<<https://docs.kernel.org/6.6/staging/speculation.html>>
 
 \[REF-1\] Jo Van Bulck, Daniel Moghimi, Michael Schwarz, Moritz Lipp,
 Marina Minkin, Daniel Genkin, Yuval Yarom, Berk Sunar, Daniel Gruss, and
-Frank Piessens. “LVI: Hijacking Transient Execution through
-Microarchitectural Load Value Injection”. 2020-01-09.
-\<://lviattack.eu/lvi.pdf\>.
+Frank Piessens. "LVI: Hijacking Transient Execution through
+Microarchitectural Load Value Injection". 2020-01-09.
+<<https://lviattack.eu/lvi.pdf>>.
 
-\[REF-2\] Intel Corporation. “Fast Store Forwarding Predictor”.
-\<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/fast-store-forwarding-predictor.html\>
+\[REF-2\] Intel Corporation. "Fast Store Forwarding Predictor".
+<<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/fast-store-forwarding-predictor.html>>
 
-\[REF-3\] AMD. “Security Analysis Of AMD Predictive Store Forwarding”.
-<https://www.amd.com/system/files/documents/security-analysis-predictive-store-forwarding.pdf>
+\[REF-3\] AMD. "Security Analysis Of AMD Predictive Store Forwarding".
+<<https://www.amd.com/system/files/documents/security-analysis-predictive-store-forwarding.pdf>>
 
 ### CWE-D: Exposure of Sensitive Information caused by Shared Microarchitectural Predictor State that influences Transient Execution
 
@@ -1330,18 +1330,18 @@ predictor state.
 
 #### References
 
-\[REF-1\] Intel Corporation. “Retpoline: A Branch Target Injection
-Mitigation”.
-\<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/retpoline-branch-target-injection-mitigation.html\>
+\[REF-1\] Intel Corporation. "Retpoline: A Branch Target Injection
+Mitigation".
+<<https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/retpoline-branch-target-injection-mitigation.html>>
 
 \[REF-2\] Paul Kocher, Jann Horn, Anders Fogh, Daniel Genkin, Daniel
 Gruss, Werner Haas, Mike Hamburg, Moritz Lipp, Stefan Mangard, Thomas
-Prescher, Michael Schwarz, Yuval Yarom. “Spectre Attacks: Exploiting
-Speculative Execution”. \<https://spectreattack.com/spectre.pdf\>.
+Prescher, Michael Schwarz, Yuval Yarom. "Spectre Attacks: Exploiting
+Speculative Execution". <<https://spectreattack.com/spectre.pdf>>.
 
-\[REF-3\] Yuval Yarom, Katrina Falkner. “Flush+Reload: A High
-Resolution, Low Noise, L3 Cache Side-Channel Attack”.
-<https://www.usenix.org/system/files/conference/usenixsecurity14/sec14-paper-yarom.pdf>
+\[REF-3\] Yuval Yarom, Katrina Falkner. "Flush+Reload: A High
+Resolution, Low Noise, L3 Cache Side-Channel Attack".
+<<https://www.usenix.org/system/files/conference/usenixsecurity14/sec14-paper-yarom.pdf>>
 
 ### CWE-E: Speculative Oracle (full title TBD)
 
@@ -1410,21 +1410,21 @@ TBD
     avoid introducing new terms, or terms that are specific to Intel’s
     literature/documentation.
     
-      - Intel often uses “malicious adversary,” but here I have used
-        “attacker” to align with the [CWE
+      - Intel often uses "malicious adversary," but here I have used
+        "attacker" to align with the [CWE
         glossary](https://cwe.mitre.org/documents/glossary/).
     
-      - “Transient,” “transient execution,” “transient operations,” etc.
+      - "Transient," "transient execution," "transient operations," etc.
         do not exist in the CWE glossary but have been used in other
         CWEs. I had initially drafted these descriptions without using
-        the word “transient,” but this often led to unappealing
-        verbosity—I had to spell out “operations that execute but do not
-        commit to architectural state” many times. Perhaps MITRE should
-        consider adding “transient” to its CWE glossary.
+        the word "transient," but this often led to unappealing
+        verbosity—I had to spell out "operations that execute but do not
+        commit to architectural state" many times. Perhaps MITRE should
+        consider adding "transient" to its CWE glossary.
     
-      - I make liberal use of the term “processor event,” which is
-        intended to convey “something that happens while the processor
-        is executing operations.” This could be anything from a fault to
+      - I make liberal use of the term "processor event," which is
+        intended to convey "something that happens while the processor
+        is executing operations." This could be anything from a fault to
         a snoop assist.
 
   - I have tried my best to adhere to the [submission
@@ -1433,10 +1433,10 @@ TBD
     
       - **Name:** Each CWE name is intended to focus on the weakness,
         not a specific attack. Each name hints at the weakness category
-        (“Transient” or “Transient Execution”) and the affected
-        technology (“Processor” or “Microarchitecture”). CWE-C applies
-        to a specific kind of resource, “shared microarchitectural
-        predictor state,” which is included in the name.
+        ("Transient" or "Transient Execution") and the affected
+        technology ("Processor" or "Microarchitecture"). CWE-C applies
+        to a specific kind of resource, "shared microarchitectural
+        predictor state," which is included in the name.
     
       - **Summary:** Each summary is intended to describe the weakness
         itself in a single sentence. Following MITRE’s guidelines, I
@@ -1455,7 +1455,7 @@ TBD
   - Some of that CWE’s extended description has been updated and merged
     into CWE-A.
 
-  - There is a placeholder CWE-E that will cover “speculation oracle”
+  - There is a placeholder CWE-E that will cover "speculation oracle"
     weaknesses such as PACMAN.
 
   - The Observed Examples use the proposed CWE descriptions, instead of
@@ -1470,24 +1470,24 @@ TBD
   - CWE-B and CWE-D are both related to CWE-1189. Should this
     relationship be conveyed, and if so, how?
 
-  - The term “confused deputy” would be useful to describe some exploits
+  - The term "confused deputy" would be useful to describe some exploits
     that could fall within CWE-A and CWE-C, but this term does not
     appear in the CWE glossary. This term could be useful for other CWEs
     as well.
 
-  - The novel term “hardware domain” was removed from this proposal.
+  - The novel term "hardware domain" was removed from this proposal.
     This term is difficult to define and, once defined, becomes too
-    rigid. Instead, this proposal contrasts “data protected by hardware”
-    with “data protected by software.” This revised language is intended
+    rigid. Instead, this proposal contrasts "data protected by hardware"
+    with "data protected by software." This revised language is intended
     to provide hardware designers with flexibility to specify what their
     hardware is intended to protect.
 
 <!-- end list -->
 
-  - The “effectiveness” ratings for mitigations are determined by the
+  - The "effectiveness" ratings for mitigations are determined by the
     CWE schema:
     
-      - “The EffectivenessEnumeration simple type defines the different
+      - "The EffectivenessEnumeration simple type defines the different
         values related to how effective a mitigation may be in
         preventing the weakness. A value of "High" means the mitigation
         is frequently successful in eliminating the weakness entirely. A
@@ -1503,7 +1503,7 @@ TBD
         may help to minimize the potential impact of an attacker
         exploiting the weakness. A value of "Discouraged Common
         Practice" is used to indicate mitigations that are commonly
-        attempted but known to be ineffective or highly risky.”
+        attempted but known to be ineffective or highly risky."
 
 ## Applying These New CWEs to A Variety of Transient Execution CVEs
 
@@ -1512,7 +1512,7 @@ transient execution. Each entry in the table compares the current CVE
 description against a hypothetical CVE description that derives from the
 draft CWE language introduced earlier in this document. Note that many
 CVEs issued prior to 2021 did not use CWE descriptions, indicated by
-“\[No CWE\].”
+"\[No CWE\]."
 
 | CVE                                                                                | Current Description                                                                                                                                                                                                                                                                                  | New Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1547,29 +1547,29 @@ CVEs issued prior to 2021 did not use CWE descriptions, indicated by
 
 ## References
 
-1.  MITRE, “About CWE,” 27 September 2022. \[Online\]. Available:
+1.  MITRE, "About CWE," 27 September 2022. \[Online\]. Available:
     https://cwe.mitre.org/about/index.html. \[Accessed 16 November
     2022\].
 
-2.  O. Kirzner and A. Morrison, “An Analysis of Speculative Type
-    Confusion Vulnerabilities in the Wild,” in *30th USENIX Security
+2.  O. Kirzner and A. Morrison, "An Analysis of Speculative Type
+    Confusion Vulnerabilities in the Wild," in *30th USENIX Security
     Symposium (USENIX Security 21)*, 2021.
 
 3.  M. Schwarz, M. Schwarzl, M. Lipp, J. Masters and D. Gruss,
-    “NetSpectre: Read Arbitrary Memory over Network,” in *ESORICS
+    "NetSpectre: Read Arbitrary Memory over Network," in *ESORICS
     2019: 24th European Symposium on Research in Computer Security*,
     Luxembourg, Luxembourg, 2019.
 
-4.  Intel Corporation., “Refined Speculative Execution Terminology,”
+4.  Intel Corporation., "Refined Speculative Execution Terminology,"
     Intel, 5 April 2021. \[Online\]. Available:
     https://www.intel.com/content/www/us/en/developer/articles/technical/softwaresecurity-guidance/best-practices/refined-speculative-execution-terminology.html.
 
-5.  Intel Corporation, “Intel® 64 and IA-32 Architectures Software
-    Developer Manuals,” 2022 30 September. \[Online\]. Available:
+5.  Intel Corporation, "Intel® 64 and IA-32 Architectures Software
+    Developer Manuals," 2022 30 September. \[Online\]. Available:
     https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html.
     \[Accessed 2022 21 November\].
 
-6.  AMD, “Developer Guides, Manuals & ISA Documents,” \[Online\].
+6.  AMD, "Developer Guides, Manuals & ISA Documents," \[Online\].
     Available:
     https://developer.amd.com/resources/developer-guides-manuals/.
     \[Accessed 21 November 2022\].
