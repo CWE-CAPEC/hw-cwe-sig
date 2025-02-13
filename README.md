@@ -13,6 +13,11 @@ Recordings: https://drive.google.com/drive/folders/107QCUryxxgNvyaGb_sknEGlrJ0XJ
 
 Mailing List: hw-cwe-special-interest-group-sig-list@mitre.org
 
+## Ad-Hoc Working Groups
+
+2025 Most Important Hardware Weaknesses Working Group (MIHW WG)
+Minutes: 
+
 ## Objective
 The Hardware CWE™ Special Interest Group (HW CWE SIG) offers a forum for researchers and representatives from organizations operating in hardware design, manufacturing, and security to interact, share opinions and expertise, and leverage each other’s experiences in supporting the continued growth and adoption of CWE as a common language for defining hardware security weaknesses. The objective of the HW CWE SIG is to establish a stakeholder community for discussing HW CWE content and explore further cross-organizational collaboration opportunities. Members of the HW CWE SIG will work with each other through open and collaborative discussions to provide critical input regarding domain coverage, coverage goals, and content hierarchical structure. 
 
