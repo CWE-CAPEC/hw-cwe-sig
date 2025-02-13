@@ -1,0 +1,1 @@
+This folder is meant to hold the meeting minutes for the 2025 Most Important Hardware Weaknesses meeting minutes.
